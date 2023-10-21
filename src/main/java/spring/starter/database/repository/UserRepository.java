@@ -1,6 +1,6 @@
-package spring.starter.repository;
+package spring.starter.database.repository;
 
-import spring.starter.repository.pool.ConnectionPool;
+import spring.starter.database.pool.ConnectionPool;
 
 public class UserRepository {
 

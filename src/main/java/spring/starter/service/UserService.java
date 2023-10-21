@@ -1,6 +1,6 @@
 package spring.starter.service;
 
-import spring.starter.repository.UserRepository;
+import spring.starter.database.repository.UserRepository;
 
 public class UserService {
 
