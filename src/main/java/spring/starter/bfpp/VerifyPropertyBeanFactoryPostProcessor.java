@@ -10,13 +10,15 @@ public class VerifyPropertyBeanFactoryPostProcessor implements BeanFactoryPostPr
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println("Здесь создается сначала базовый BeanFactoryPostProcessor child -> (PropertyResourceConfigurer)" +
-                "потому что по приоритету он выше ");
+        /**
+         * Здесь создается сначала базовый BeanFactoryPostProcessor child -> (PropertyResourceConfigurer)
+         * потому что по приоритету он выше
+         * */
     }
 
     @Override
     public int getOrder() {
-        System.out.println("Tут можно узнать приоритет бина чем меньше тем бин будет ближе/выше по приоритету ");
+        //Tут можно узнать приоритет бина чем меньше тем бин будет ближе/выше по приоритету
         return 0;
     }
 }

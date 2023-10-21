@@ -4,11 +4,9 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.starter.bfpp.LogBeanFactoryPostProcessor;
 import spring.starter.bfpp.VerifyPropertyBeanFactoryPostProcessor;
-import spring.starter.ioc.Container;
-import spring.starter.repository.CompanyRepository;
-import spring.starter.repository.UserRepository;
-import spring.starter.repository.pool.ConnectionPool;
-import spring.starter.service.UserService;
+import spring.starter.database.repository.CompanyRepository;
+import spring.starter.database.pool.ConnectionPool;
+import spring.starter.database.repository.CrudRepository;
 
 public class SpringStarterApplication {
 
@@ -26,8 +24,11 @@ public class SpringStarterApplication {
             // without ConnectionPool.class returned Object
             var connectionPool = context.getBean("p1", ConnectionPool.class);  //Здесь может получить по индекс или по name
 
-            var companyRepository = context.getBean("companyRepository", CompanyRepository.class);
             System.out.println(connectionPool); // Здесь уже  можем  видеть установленный нам параметры в application yaml и другие
+
+            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
+            System.out.println(companyRepository.findById(2));
+
 
             System.out.println(BeanFactoryPostProcessor.class.isAssignableFrom(VerifyPropertyBeanFactoryPostProcessor.class));
             System.out.println(BeanFactoryPostProcessor.class.isAssignableFrom(LogBeanFactoryPostProcessor.class));

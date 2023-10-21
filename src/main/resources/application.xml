@@ -7,9 +7,35 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+
+    <!--    *******************************************************************************************************************-->
     <!--BEAN FOR READ PROPERTIES     NEW VARIANT-->
     <context:property-placeholder location="application.properties"/>
+    <!--BEAN FOR READ PROPERTIES        OLD VARIANT-->
+    <!--    <bean name="yamlPropertiesFactoryBean" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">-->
+    <!--        <property name="resources" value="application.yaml"/>-->
+    <!--    </bean>-->
+    <!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
+    <!--        <property name="properties" value="yamlPropertiesFactoryBean"/>-->
+    <!--    </bean>-->
+<!--    *******************************************************************************************************************-->
 
+<!--    CREATE CUSTOM BEANPOSTPROCESSOR-->
+        <bean class="spring.starter.bpp.InjectBeanPostProcessor"/>
+        <bean class="spring.starter.bpp.TransactionBeanPostProcessor"/>
+        <bean class="spring.starter.bpp.AuditBeanPostProcessor"/>
+<!--    *******************************************************************************************************************-->
+<!--    BEAN FOR HANDLING(working) @PostConstruct,@PreDestroy ANNOTATIONS-->
+<!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
+    <!--    BEAN FOR HANDLING(working) @PostConstruct,@PreDestroy ANNOTATIONS-->
+
+<!--    alternative way additionally adds BeanPostProcessor-->
+    <context:annotation-config/>
+<!--    *******************************************************************************************************************-->
+
+
+
+<!--    *******************************************************************************************************************-->
     <!--consistency REQUIRED CASE-->
 <!--    <bean id="pool1" class="spring.starter.repository.pool.ConnectionPool">-->
 <!--        <constructor-arg value="postgres"/> -->
@@ -34,7 +60,7 @@
 <!--    WITH INDEX OR NAME AND TYPE CASE FOR -->
     <!-- SPel ~ Spring Expression Language #{} -->
     <!-- SPel ~ Simple Expression Language ${} -->
-    <bean id="pool1" name="p1,p2" class="spring.starter.repository.pool.ConnectionPool" init-method="init" destroy-method="destroy">
+    <bean id="pool1" name="p1,p2" class="spring.starter.database.pool.ConnectionPool">
         <constructor-arg index="0" type="java.lang.String" value="${db.username}"/>
         <constructor-arg index="3" type="java.util.Map">
             <map>
@@ -64,24 +90,13 @@
     </bean>
 
     <!--bind bean to depended bean AND WITH FACTORY METHOD INJECTION-->
-    <bean id="companyRepository" class="spring.starter.repository.CompanyRepository" factory-method="of">
-        <constructor-arg ref="pool1"/>
-    </bean>
+    <bean id="companyRepository" class="spring.starter.database.repository.CompanyRepository"/>
+ <!--    *******************************************************************************************************************-->
 
 
     <!--CustomBeanFactoryPostProcessor-->
     <bean class="spring.starter.bfpp.LogBeanFactoryPostProcessor"/>
     <bean class="spring.starter.bfpp.VerifyPropertyBeanFactoryPostProcessor"/>
     <!--CustomBeanFactoryPostProcessor-->
-
-
-    <!--BEAN FOR READ PROPERTIES        OLD VARIANT-->
-<!--    <bean name="yamlPropertiesFactoryBean" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">-->
-<!--        <property name="resources" value="application.yaml"/>-->
-<!--    </bean>-->
-<!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
-<!--        <property name="properties" value="yamlPropertiesFactoryBean"/>-->
-<!--    </bean>-->
-
 
 </beans>
