@@ -25,8 +25,17 @@
 <!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
     <!--    BEAN FOR HANDLING(working) @PostConstruct,@PreDestroy ANNOTATIONS-->
 
-    <context:component-scan base-package="spring.starter"/>
-<!--    *******************************************************************************************************************-->
+    <context:component-scan base-package="spring.starter"
+                            annotation-config="true"
+                            resource-pattern="**/*.class"
+                            scoped-proxy="no"
+                            use-default-filters="true">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:include-filter type="assignable" expression="spring.starter.database.repository.CrudRepository"/>
+        <context:include-filter type="regex" expression="spring\..+Repository"/>
+    </context:component-scan>
+
+<!-- чтобы component scan узнал на основе каких фильтр создал бины,можем явно указать тогда будет все работать даже если default-filter будет "false"  -->
 
 
 

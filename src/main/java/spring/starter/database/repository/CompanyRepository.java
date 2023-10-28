@@ -3,6 +3,8 @@ package spring.starter.database.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import spring.starter.bpp.Auditing;
 import spring.starter.bpp.Transaction;
@@ -12,7 +14,10 @@ import spring.starter.database.pool.ConnectionPool;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository в файле xml указали что CrudRepository будет создан даже не  указываем что это @Component
+
+/** в этом случае возвращается прокси даже если помечен как prototype всегда возвращается singleton объект */
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transaction
 @Auditing
 public class CompanyRepository implements CrudRepository<Integer,Company>{
