@@ -10,7 +10,7 @@
 
     <!--    *******************************************************************************************************************-->
     <!--BEAN FOR READ PROPERTIES     NEW VARIANT-->
-    <context:property-placeholder location="application.properties"/>
+<!--    <context:property-placeholder location="application.properties"/>   @PropertySource-->
     <!--BEAN FOR READ PROPERTIES        OLD VARIANT-->
     <!--    <bean name="yamlPropertiesFactoryBean" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">-->
     <!--        <property name="resources" value="application.yaml"/>-->

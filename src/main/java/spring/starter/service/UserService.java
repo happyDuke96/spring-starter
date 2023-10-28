@@ -2,7 +2,6 @@ package spring.starter.service;
 
 import org.springframework.stereotype.Service;
 import spring.starter.database.entity.Company;
-import spring.starter.database.repository.CompanyRepository;
 import spring.starter.database.repository.CrudRepository;
 import spring.starter.database.repository.UserRepository;
 

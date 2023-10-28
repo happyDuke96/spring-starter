@@ -1,9 +1,11 @@
 package spring.starter;
 
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.starter.bfpp.LogBeanFactoryPostProcessor;
 import spring.starter.bfpp.VerifyPropertyBeanFactoryPostProcessor;
+import spring.starter.config.ApplicationConfiguration;
 import spring.starter.database.pool.ConnectionPool;
 import spring.starter.database.repository.CrudRepository;
 
@@ -13,7 +15,7 @@ public class SpringStarterApplication {
 
 
 
-        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml")) {
+        try (var context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class)) {
             // without ConnectionPool.class returned Object
             var connectionPool = context.getBean("pool1", ConnectionPool.class);  //Здесь может получить по индекс или по name
 
@@ -25,14 +27,6 @@ public class SpringStarterApplication {
 
             System.out.println(BeanFactoryPostProcessor.class.isAssignableFrom(VerifyPropertyBeanFactoryPostProcessor.class));
             System.out.println(BeanFactoryPostProcessor.class.isAssignableFrom(LogBeanFactoryPostProcessor.class));
-
-            /**
-             * Spring поставляет properties(значение) с помощью BeanFactoryPostProcessor child -> (PropertyResourceConfigurer)
-             * этот класс вызывает метод postProcessBeanFactory
-             * который принимает ConfigurableListableBeanFactory --> он же BeanFactory --> ApplicationContext
-             * в этом методе всегда создается новый MutablePropertySources класс потом берет environment дальше распарсить
-             * prefix --> '${'   postfix --> '}' добавляет/обновляет  значение из environment
-             */
         }
     }
 
