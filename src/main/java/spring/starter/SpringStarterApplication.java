@@ -22,7 +22,7 @@ public class SpringStarterApplication {
 
         try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml")) {
             // without ConnectionPool.class returned Object
-            var connectionPool = context.getBean("p1", ConnectionPool.class);  //Здесь может получить по индекс или по name
+            var connectionPool = context.getBean("pool1", ConnectionPool.class);  //Здесь может получить по индекс или по name
 
             System.out.println(connectionPool); // Здесь уже  можем  видеть установленный нам параметры в application yaml и другие
 

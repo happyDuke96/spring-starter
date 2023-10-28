@@ -20,17 +20,12 @@
     <!--    </bean>-->
 <!--    *******************************************************************************************************************-->
 
-<!--    CREATE CUSTOM BEANPOSTPROCESSOR-->
-        <bean class="spring.starter.bpp.InjectBeanPostProcessor"/>
-        <bean class="spring.starter.bpp.TransactionBeanPostProcessor"/>
-        <bean class="spring.starter.bpp.AuditBeanPostProcessor"/>
 <!--    *******************************************************************************************************************-->
 <!--    BEAN FOR HANDLING(working) @PostConstruct,@PreDestroy ANNOTATIONS-->
 <!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
     <!--    BEAN FOR HANDLING(working) @PostConstruct,@PreDestroy ANNOTATIONS-->
 
-<!--    alternative way additionally adds BeanPostProcessor-->
-    <context:annotation-config/>
+    <context:component-scan base-package="spring.starter"/>
 <!--    *******************************************************************************************************************-->
 
 
@@ -60,30 +55,28 @@
 <!--    WITH INDEX OR NAME AND TYPE CASE FOR -->
     <!-- SPel ~ Spring Expression Language #{} -->
     <!-- SPel ~ Simple Expression Language ${} -->
-    <bean id="pool1" name="p1,p2" class="spring.starter.database.pool.ConnectionPool">
-        <constructor-arg index="0" type="java.lang.String" value="${db.username}"/>
-        <constructor-arg index="3" type="java.util.Map">
-            <map>
-                <entry key="url" value="postgresurl"/>
-                <entry key="password" value="456"/>
-                <entry key="driver" value-ref="driver"/>
-                <entry key="test" value="#{driver.length() > 10}"/>
-                <entry key="test2" value="#{driver.substring(3)}"/>
-                <entry key="test3" value="#{driver.length() > T(Math).random() * 10}"/>
-                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>
-                <entry key="systemproperties" value="#{systemProperties['java.class.version']}"/>
-            </map>
-        </constructor-arg>
-        <constructor-arg index="1" type="java.lang.Integer" value="${db.pool.size}"/>
-        <constructor-arg index="2" type="java.util.List">
-            <list>
-                <value>--arg1=value1</value>
-                <value>--arg2=value2</value>
-                <ref bean="driver"/>
+<!--    <constructor-arg index="0" type="java.lang.String" value="${db.username}"/>-->
+<!--    <constructor-arg index="3" type="java.util.Map">-->
+<!--        <map>-->
+<!--            <entry key="url" value="postgresurl"/>-->
+<!--            <entry key="password" value="456"/>-->
+<!--            <entry key="driver" value-ref="driver"/>-->
+<!--            <entry key="test" value="#{driver.length() > 10}"/>-->
+<!--            <entry key="test2" value="#{driver.substring(3)}"/>-->
+<!--            <entry key="test3" value="#{driver.length() > T(Math).random() * 10}"/>-->
+<!--            <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>-->
+<!--            <entry key="systemproperties" value="#{systemProperties['java.class.version']}"/>-->
+<!--        </map>-->
+<!--    </constructor-arg>-->
+<!--    <constructor-arg index="1" type="java.lang.Integer" value="${db.pool.size}"/>-->
+<!--    <constructor-arg index="2" type="java.util.List">-->
+<!--        <list>-->
+<!--            <value>&#45;&#45;arg1=value1</value>-->
+<!--            <value>&#45;&#45;arg2=value2</value>-->
+<!--            <ref bean="driver"/>-->
 
-            </list>
-        </constructor-arg>
-    </bean>
+<!--        </list>-->
+<!--    </constructor-arg>-->
 
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
@@ -92,11 +85,5 @@
     <!--bind bean to depended bean AND WITH FACTORY METHOD INJECTION-->
     <bean id="companyRepository" class="spring.starter.database.repository.CompanyRepository"/>
  <!--    *******************************************************************************************************************-->
-
-
-    <!--CustomBeanFactoryPostProcessor-->
-    <bean class="spring.starter.bfpp.LogBeanFactoryPostProcessor"/>
-    <bean class="spring.starter.bfpp.VerifyPropertyBeanFactoryPostProcessor"/>
-    <!--CustomBeanFactoryPostProcessor-->
 
 </beans>

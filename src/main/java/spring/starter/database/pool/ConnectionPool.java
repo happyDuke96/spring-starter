@@ -1,25 +1,23 @@
 package spring.starter.database.pool;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.util.List;
-import java.util.Map;
 
+@Component("pool1")
 public class ConnectionPool {
 
-    private final String username;
-    private final Integer poolSize;
-    private final List<Object> args;
-    private final Map<String,Object> properties;
 
-    public ConnectionPool(String username,
-                          Integer poolSize,
-                          List<Object> args,
-                          Map<String, Object> properties) {
+    private  final String username;
+
+    private  final Integer poolSize;
+
+    public ConnectionPool(@Value("${db.username}")String username,
+                          @Value("${db.pool.size}") Integer poolSize) {
         this.username = username;
         this.poolSize = poolSize;
-        this.args = args;
-        this.properties = properties;
     }
 
 
@@ -51,8 +49,6 @@ public class ConnectionPool {
         return "ConnectionPool{" +
                 "\nusername='" + username + '\'' +
                 ",\n poolSize=" + poolSize +
-                ",\n args=" + args +
-                ",\n properties=" + properties +
                 '}';
     }
 }
