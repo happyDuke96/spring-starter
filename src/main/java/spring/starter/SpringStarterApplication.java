@@ -4,19 +4,12 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.starter.bfpp.LogBeanFactoryPostProcessor;
 import spring.starter.bfpp.VerifyPropertyBeanFactoryPostProcessor;
-import spring.starter.database.repository.CompanyRepository;
 import spring.starter.database.pool.ConnectionPool;
 import spring.starter.database.repository.CrudRepository;
 
 public class SpringStarterApplication {
 
     public static void main(String[] args) {
-
-        // IOC
-//        var container = new Container();
-//        var pool = container.get(ConnectionPool.class);
-//        var userRepository = container.get(UserRepository.class);
-//        var userService = container.get(UserService.class);
 
 
 
