@@ -8,6 +8,7 @@ import spring.starter.bfpp.VerifyPropertyBeanFactoryPostProcessor;
 import spring.starter.config.ApplicationConfiguration;
 import spring.starter.database.pool.ConnectionPool;
 import spring.starter.database.repository.CrudRepository;
+import spring.starter.service.CompanyService;
 
 public class SpringStarterApplication {
 
@@ -21,8 +22,8 @@ public class SpringStarterApplication {
 
             System.out.println(connectionPool); // Здесь уже  можем  видеть установленный нам параметры в application yaml и другие
 
-            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
-            System.out.println(companyRepository.findById(2));
+            var companyService = context.getBean(CompanyService.class);
+            System.out.println(companyService.findById(2));
 
 
             System.out.println(BeanFactoryPostProcessor.class.isAssignableFrom(VerifyPropertyBeanFactoryPostProcessor.class));
