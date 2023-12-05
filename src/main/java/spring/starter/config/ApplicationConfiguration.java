@@ -39,7 +39,7 @@ public class ApplicationConfiguration {
         return new ConnectionPool("test-username",31);
     }
 
-    @Bean
+    @Bean("beanUserRepository")
     public UserRepository userRepository(ConnectionPool pool2){
         return new UserRepository(pool2);
     }
@@ -54,4 +54,9 @@ public class ApplicationConfiguration {
         var connectionPool3 = pool3();
         return new UserRepository(pool3());
     }
+
+    /** Spring Boot - это набор библиотек основана какого-то модуля спринга с автоконфигурацией,
+     * с помощью аннотаций @Configuration(для создание разных бинов и его настройки) и @Conditional
+     * для того включать или отключать то или иное конфигурации
+     * */
 }
