@@ -1,0 +1,5 @@
+2023-12-09 15:44:51.221  INFO 2440 --- [main] s.starter.database.pool.ConnectionPool   : Init Pool
+2023-12-09 15:44:51.241  INFO 2440 --- [main] s.starter.database.pool.ConnectionPool   : Init Pool
+2023-12-09 15:44:51.243  INFO 2440 --- [main] s.starter.database.pool.ConnectionPool   : Init Pool
+2023-12-09 15:44:51.246  WARN 2440 --- [main] s.s.d.repository.CompanyRepository       : Init companyService
+2023-12-09 15:44:51.249  WARN 2440 --- [main] s.s.d.repository.CompanyRepository       : Init companyService

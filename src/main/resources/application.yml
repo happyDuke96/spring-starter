@@ -22,3 +22,10 @@ db:
       timeout: 2
     - size: 3
       timeout: 3
+logging:
+  level:
+    root: warn # for all logging level,or OFF for disable all logs
+    spring.starter.database.pool: info
+  file:
+    name: starter.log
+    path: / # root path
