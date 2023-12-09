@@ -16,7 +16,7 @@ import spring.starter.database.repository.UserRepository;
  * это значит он работает до создание бина в ConfigurationClassPostProcessor ConfigurationClassBeanDefinitionReader reader
  * который настроит бины до их создании */
 @Configuration // proxyBeanMethods = false - for turnOff CGLIB
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 @ComponentScan(basePackages = "spring.starter",
                 resourcePattern = "**/*.class",
                 useDefaultFilters = false,includeFilters = {
