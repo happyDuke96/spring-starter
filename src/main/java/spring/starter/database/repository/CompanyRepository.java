@@ -1,11 +1,9 @@
 package spring.starter.database.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Repository;
 import spring.starter.bpp.Auditing;
 import spring.starter.bpp.Transaction;
 import spring.starter.database.entity.Company;
@@ -20,6 +18,7 @@ import java.util.Optional;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transaction
 @Auditing
+@RequiredArgsConstructor
 public class CompanyRepository implements CrudRepository<Integer,Company>{
 
 //    @InjectBean
@@ -29,15 +28,8 @@ public class CompanyRepository implements CrudRepository<Integer,Company>{
 //    @Qualifier("pool1")
     private final ConnectionPool pool1;
     private final List<ConnectionPool> pools;
+    @Value("${db.pool.size}")
     private final  Integer poolSize;
-
-    public CompanyRepository(ConnectionPool pool1,
-                             List<ConnectionPool> pools,
-                             @Value("${db.pool.size}") Integer poolSize) {
-        this.pool1 = pool1;
-        this.pools = pools;
-        this.poolSize = poolSize;
-    }
 
     @Override
     public Optional<Company> findById(Integer id) {
