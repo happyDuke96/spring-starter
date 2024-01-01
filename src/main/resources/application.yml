@@ -1,0 +1,31 @@
+db:
+  username: postgres
+  password: pass
+  driver: PostgresDriver
+  url: postgres:5432
+  hosts: localhost,127.0.0.1
+  properties:
+    first: 123
+    second: 456
+    third.value: 789
+  pool:
+    size: 10
+    timeout: 10
+  #  pools: -- > это будет массив в виде строки
+  #    - first
+  #    - second
+  #    - third
+  pools: # --> это будет массив виде объект пример class Pool --> fields: size,timeout --> List<Pool> pools
+    - size: 1
+      timeout: 1
+    - size: 2
+      timeout: 2
+    - size: 3
+      timeout: 3
+logging:
+  level:
+    root: warn # for all logging level,or OFF for disable all logs
+    spring.starter.database.pool: info
+  file:
+    name: starter.log
+    path: / # root path
